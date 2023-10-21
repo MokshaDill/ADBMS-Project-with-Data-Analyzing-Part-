@@ -24,3 +24,11 @@ else
     </li>
 }
 </ul>
+@if (SignInManager.IsSignedIn(User))
+{
+    <!-- Content for the page to display when the user is logged in -->
+    <section class="container">
+        <h1>Welcome to your dashboard, @User.Identity?.Name!</h1>
+        <!-- Add your content here -->
+    </section>
+}
