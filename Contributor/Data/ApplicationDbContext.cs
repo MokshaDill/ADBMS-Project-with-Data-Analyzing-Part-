@@ -9,5 +9,7 @@ namespace Contributor.Data
             : base(options)
         {
         }
+
+        public DbSet<Contributor.Models.BloodCampCon>? BloodCampCon { get; set; }
     }
 }

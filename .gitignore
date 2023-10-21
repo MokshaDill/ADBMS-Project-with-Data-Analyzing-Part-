@@ -476,6 +476,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
+# Visual Studio files to be ignored
+.vs/
+*.suo
+.vscode/
+
 # Visual Studio temporary files
 .vscode/
 .vs/
@@ -516,3 +522,4 @@ thumbs.db
 
 # Publish directory
 publish/
+
