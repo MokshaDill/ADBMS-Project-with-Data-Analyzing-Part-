@@ -1,0 +1,60 @@
+﻿<h4>Search BloodCamps</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShowSearchResult">
+            <div class="form-group">
+                <label for="SearchAttribute" class="control-label">Search by:</label>
+                <select name="SearchAttribute" id="SearchAttribute" class="form-control">
+                    <option value="Date">Date</option>
+                    <option value="Location">Location</option>
+                    <option value="Organization">Organization</option>
+                </select>
+            </div>
+            <div class="form-group" id="dateInput" style="">
+                <label for="SearchDate" class="control-label">Date</label>
+                <input name="SearchDate" placeholder="Date" class="form-control" />
+            </div>
+            <div class="form-group" id="locationInput" style="display: none;">
+                <label for="SearchLocation" class="control-label">Location</label>
+                <input name="SearchLocation" placeholder="Location" class="form-control" />
+            </div>
+            <div class="form-group" id="organizationInput" style="display: none;">
+                <label for="SearchOrganization" class="control-label">Organization</label>
+                <input name="SearchOrganization" placeholder="Organization" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+    // JavaScript to show/hide input fields based on the dropdown selection
+    const searchAttribute = document.getElementById('SearchAttribute');
+    const dateInput = document.getElementById('dateInput');
+    const locationInput = document.getElementById('locationInput');
+    const organizationInput = document.getElementById('organizationInput');
+
+    searchAttribute.addEventListener('change', function () {
+        dateInput.style.display = 'none';
+        locationInput.style.display = 'none';
+        organizationInput.style.display = 'none';
+
+        const selectedAttribute = searchAttribute.value;
+        if (selectedAttribute === 'Date') {
+            dateInput.style.display = 'block';
+        } else if (selectedAttribute === 'Location') {
+            locationInput.style.display = 'block';
+        } else if (selectedAttribute === 'Organization') {
+            organizationInput.style.display = 'block';
+        }
+    });
+</script>
+

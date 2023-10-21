@@ -476,7 +476,50 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
 # Visual Studio files to be ignored
 .vs/
 *.suo
 .vscode/
+
+# Visual Studio temporary files
+.vscode/
+.vs/
+obj/
+bin/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+*.user
+
+# Visual Studio for Mac
+.vscode/
+.idea/
+*.userprefs
+*.suo
+*.user
+
+# Rider
+.idea/
+.idearunne
+
+# User-specific files
+.vscode/
+.idea/
+.DS_Store
+thumbs.db
+
+# Logs and databases
+*.log
+*.sqlite
+
+# Publish directory
+publish/
+

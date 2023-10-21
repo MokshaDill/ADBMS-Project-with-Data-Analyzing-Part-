@@ -26,6 +26,16 @@ namespace Blood_Donor_Portal.Controllers
                           View(await _context.BloodCamp.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.BloodCamp'  is null.");
         }
+        // GET: BloodCamps/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+        // POST: BloodCamps/ShowSearchForm
+        public async Task<IActionResult> ShowSearchResult(DateTime SearchDate,String SearchLocation,String SearchOrganization)
+        {
+            return  View("Index",await _context.BloodCamp.Where(j=>j.Date.Equals(SearchDate)||j.Location.Contains(SearchLocation)|| j.Organization.Contains(SearchOrganization)).ToListAsync());
+        }
 
         // GET: BloodCamps/Details/5
         public async Task<IActionResult> Details(int? id)
