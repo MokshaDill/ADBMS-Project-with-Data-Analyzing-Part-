@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Admin.Models;
+using System.Drawing;
 
 namespace Admin.Data
 {
@@ -9,5 +11,8 @@ namespace Admin.Data
             : base(options)
         {
         }
+        public DbSet<Admin.Models.Message>? Message { get; set; }
     }
+
+
 }
