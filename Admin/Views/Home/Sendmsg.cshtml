@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Sendmsg";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h1>Donor and Message Search</h1>
+
+<input type="text" id="nicInput" placeholder="Enter NIC" />
+<button onclick="searchDonorAndMessages()">Search</button>
+
+<div id="resultContainer">
+    <!-- Results will be displayed here -->
+</div>
+
+<script>
+    function searchDonorAndMessages() {
+        var nic = document.getElementById("nicInput").value;
+
+        // Make an AJAX request to the server to search for donors and messages based on NIC
+        fetch(`/api/Message/SearchDonorAndMessages?nic=${nic}`)
+            .then(response => response.json())
+            .then(data => {
+                // Process and display the search results in the resultContainer
+                var resultContainer = document.getElementById("resultContainer");
+                resultContainer.innerHTML = JSON.stringify(data, null, 2); // Replace with actual rendering logic
+            })
+            .catch(error => {
+                console.error('Search failed:', error);
+            });
+    }
+</script>
