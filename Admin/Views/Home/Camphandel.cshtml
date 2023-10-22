@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "Camphandel";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<style>
+    .table-container {
+        margin: 20px; /* Adjust the margin as needed */
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Define styles for the "approve" button */
+        .approve-button {
+            background-color: #4CAF50; /* Green background color */
+            color: white; /* White text color */
+            border: none; /* No border */
+            padding: 10px 20px; /* Padding for the button */
+            cursor: pointer; /* Show a pointer cursor on hover */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Change button style on hover */
+        .approve-button:hover {
+            background-color: #45a049; /* Slightly darker green on hover */
+        }
+
+
+        .cell-with-margin {
+            margin: 10px; /* Adjust the margin value as needed */
+        }
+
+
+</style>
+
+<div style="text-align: center;">
+    <h1>Request Camps</h1>
+    <div>
+        <table style="margin: 0 auto;">
+            <tr>
+                <td class="cell-with-margin" style="text-align: center;">
+                    <form action="../Home/BloodstatusCRUD" method="post">
+                        <button class="approve-button" type="submit">Approve</button>
+                    </form>
+                </td>
+                <td class="cell-with-margin" style="text-align: center;"></td>
+                <td class="cell-with-margin" style="text-align: center;">
+                    <form action="approve.php" method="post">
+                        <button class="approve-button" type="submit">Approved List</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>User ID</th>
+                <th>Camp Name</th>
+                <th>Camp Date</th>
+                <th>Camp Location</th>
+                <th>Purpose</th>
+                <th>Additional Details</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @using (var connection = new System.Data.SqlClient.SqlConnection("Server=tcp:bloodbank-server.database.windows.net,1433;Initial Catalog=bloodbank;Persist Security Info=False;User ID=admin727;Password='bloodbank@12';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;"))
+            {
+                connection.Open();
+                var query = "SELECT * FROM RequestCamp";
+                var command = new System.Data.SqlClient.SqlCommand(query, connection);
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        <tr>
+                            <td>@reader["RequestID"]</td>
+                            <td>@reader["UserId"]</td>
+                            <td>@reader["CampName"]</td>
+                            <td>@reader["CampDate"]</td>
+                            <td>@reader["CampLocation"]</td>
+                            <td>@reader["Purpose"]</td>
+                            <td>@reader["AdditionalDetails"]</td>
+                            <td>@reader["Status"]</td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Blood Inventory";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<style>
+    .table-container {
+        margin: 20px; /* Adjust the margin as needed */
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:hover {
+            background-color: #ddd;
+        }
+</style>
+
+<h1>Blood Inventory</h1>
+
+<div class="table-container">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Blood Unit ID</th>
+            <th>User ID</th>
+            <th>Blood Type</th>
+            <th>Rh Factor</th>
+            <th>Collection Date</th>
+            <th>Expiration Date</th>
+            <th>Storage Location</th>
+            <th>Quantity (ml)</th>
+            <th>Storage Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @using (var connection = new System.Data.SqlClient.SqlConnection("Server=tcp:bloodbank-server.database.windows.net,1433;Initial Catalog=bloodbank;Persist Security Info=False;User ID=admin727;Password='bloodbank@12';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;"))
+        {
+            connection.Open();
+            var query = "SELECT * FROM BloodStorage";
+            var command = new System.Data.SqlClient.SqlCommand(query, connection);
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    <tr>
+                        <td>@reader["bloodID"]</td>
+                        <td>@reader["UserId"]</td>
+                        <td>@reader["BloodType"]</td>
+                        <td>@reader["RhFactor"]</td>
+                        <td>@reader["CollectionDate"]</td>
+                        <td>@reader["ExpirationDate"]</td>
+                        <td>@reader["StorageLocation"]</td>
+                        <td>@reader["QuantityInMl"]</td>
+                        <td>@reader["StorageStatus"]</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+</div>

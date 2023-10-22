@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard2";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<style>
+    .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+</style>
+
+<script>
+    function setDynamicSize() {
+        var iframe = document.getElementById("bbank-iframe");
+        var width = window.innerWidth; // Adjust this as needed
+        var height = window.innerHeight; // Adjust this as needed
+
+        iframe.style.width = width + "px";
+        iframe.style.height = height + "px";
+    }
+
+    // Call the function initially and on window resize
+    window.addEventListener("resize", setDynamicSize);
+    window.addEventListener("load", setDynamicSize);
+</script>
+
+<div class="centered">
+    <iframe id="bbank-iframe" b title="BBANK DB1" src="https://app.powerbi.com/reportEmbed?reportId=0d784f46-fad6-4415-abb3-1e2a48471328&autoAuth=true&ctid=9486ac65-39d3-4d25-977c-76d9c31c0046" frameborder="0" allowFullScreen="true"></iframe>
+</div>
+
