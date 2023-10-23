@@ -1,7 +1,10 @@
-﻿namespace Admin.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Admin.Models
 {
     public class AdminModel
     {
+             [Key]
             public int AdminId { get; set; }
             public string Username { get; set; }
             public string Password { get; set; }
