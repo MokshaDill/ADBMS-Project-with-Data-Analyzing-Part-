@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Admin.Models.AdminModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<style>
+
+    .table-container {
+        margin: 20px auto; /* Add margin and center the table horizontally */
+        width: 80%; /* Adjust the width as needed */
+        text-align: center; /* Center the table contents horizontally */
+    }
+
+    .table {
+        border-collapse: collapse;
+        width: 100%; /* Fill the available width of the container */
+        margin: 0; /* Remove any default margin */
+    }
+
+        /* Optional table styling */
+        .table th, .table td {
+            border: 1px solid #ccc; /* Add a border to table cells */
+            padding: 8px; /* Add padding to cell content */
+        }
+
+    /* Add more styling as needed */
+
+
+</style>
+
+<h1 class="text-center">Admin Details</h1>
+
+<div class="text-center">
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+</div>
+<div class="table-container">
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AdminId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AdminId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AdminId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

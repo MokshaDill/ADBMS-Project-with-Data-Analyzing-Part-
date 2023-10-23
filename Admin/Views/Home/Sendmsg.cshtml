@@ -3,14 +3,59 @@
     Layout = "~/Views/_Layout.cshtml";
 }
 
-<h1>Donor and Message Search</h1>
+<style>
+    * {
+  box-sizing: border-box;
+}
 
-<input type="text" id="nicInput" placeholder="Enter NIC" />
-<button onclick="searchDonorAndMessages()">Search</button>
+/* Style inputs */
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
 
-<div id="resultContainer">
-    <!-- Results will be displayed here -->
-</div>
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+}
+</style>
+
+
 
 <script>
     function searchDonorAndMessages() {
@@ -29,3 +74,75 @@
             });
     }
 </script>
+
+
+
+
+
+<div class="container">
+    <div style="text-align:center">
+    </div>
+    <div class="row">
+        <div class="column">
+
+
+            <h1>Donor Search and Message Portal</h1>
+
+            <input type="text" id="nicInput" placeholder="Enter NIC" />
+            <button onclick="searchDonorAndMessages()">Search</button>
+
+            <div id="resultContainer">
+                <!-- Results will be displayed here -->
+            </div>
+
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Message ID</th>
+                            <th>Admin ID</th>
+                            <th>NIC</th>
+                            <th>Message Text</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @using (var connection = new System.Data.SqlClient.SqlConnection("Server=tcp:bloodbank-server.database.windows.net,1433;Initial Catalog=bloodbank;Persist Security Info=False;User ID=admin727;Password='bloodbank@12';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;"))
+                        {
+                            connection.Open();
+                            var query = "SELECT * FROM Message";
+                            var command = new System.Data.SqlClient.SqlCommand(query, connection);
+                            using (var reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    <tr>
+                                        <td>@reader["MessageID"]</td>
+                                        <td>@reader["AdminId"]</td>
+                                        <td>@reader["NIC"]</td>
+                                        <td>@reader["MessageText"]</td>
+                                        <td>@reader["Timestamp"]</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+        <div class="column">
+            <form action="/action_page.php">
+				<label for="fname"> FROM</label>
+                <input type="text" id="fname" name="firstname" placeholder="">
+                <label for="lname">TO</label>
+                <input type="text" id="lname" name="lastname" placeholder="">
+                <label for="country">Subject</label> 
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+</div>
